@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + Preact + TS</title>
+    <script>
+      (function() {
+        if (typeof window.CustomEvent === "function") return false
+
+        function CustomEvent(event, params) {
+          params = params || { bubbles: false, cancelable: false, detail: undefined }
+          var evt = document.createEvent("CustomEvent")
+          evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail)
+          return evt
+        }
+
+        CustomEvent.prototype = window.Event.prototype
+        window.CustomEvent = CustomEvent
+      })()
+    </script>
+    <script src="https://unpkg.com/@webcomponents/custom-elements"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <widget-component></widget-component>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
